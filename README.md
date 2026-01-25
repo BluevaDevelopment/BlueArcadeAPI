@@ -1,4 +1,4 @@
-# BlueArcade API
+# BlueArcade API [![](https://jitpack.io/v/BluevaDevelopment/BlueArcadeAPI.svg)](https://jitpack.io/#BluevaDevelopment/BlueArcadeAPI)
 
 BlueArcade API is the public module development kit for BlueArcade 3. It provides
 stable interfaces and data contracts so external minigame modules can integrate
