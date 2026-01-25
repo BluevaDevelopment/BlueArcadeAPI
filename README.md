@@ -4,7 +4,7 @@ The official developer toolkit for BlueArcade 3. It provides the core interfaces
 ## Original Example Projects
 BlueArcade provides a full set of original example projects that demonstrate how to build complete minigames and microgames using the API.
 
-These projects are real production modules, available both as open-source repositories and as downloadable modules from the BlueArcade Store.
+These projects are real production modules, available both as open-source repositories and as downloadable modules from the Blueva Store.
 
 👉 **[View all example projects](EXAMPLE_PROJECTS.md)**
 
