@@ -1,8 +1,5 @@
 # BlueArcade API [![](https://jitpack.io/v/BluevaDevelopment/BlueArcadeAPI.svg)](https://jitpack.io/#BluevaDevelopment/BlueArcadeAPI)
-
-BlueArcade API is the public module development kit for BlueArcade 3. It provides
-stable interfaces and data contracts so external minigame modules can integrate
-with the BlueArcade runtime without depending on core internals.
+The official developer toolkit for BlueArcade 3. It provides the core interfaces and data contracts needed to build minigame modules that integrate seamlessly with the BlueArcade runtime on both Minecraft (Spigot) and Hytale.
 
 ## Installation
 
