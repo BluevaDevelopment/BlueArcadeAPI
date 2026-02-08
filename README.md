@@ -24,7 +24,7 @@ Add the repository and dependency to your build tool.
     <dependency>
         <groupId>com.github.BluevaDevelopment</groupId>
         <artifactId>BlueArcadeAPI</artifactId>
-        <version>3.1.0</version>
+        <version>3.1</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
