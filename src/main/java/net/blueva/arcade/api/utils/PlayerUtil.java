@@ -32,4 +32,11 @@ public interface PlayerUtil<P> {
      * @return In-game status (e.g., "Playing", "SPECTATOR"), or null
      */
     String getPlayerInGameStatus(P player);
+
+    /**
+     * Check if player is currently in a waiting arena.
+     * @param player The player
+     * @return true if player is in a waiting arena
+     */
+    boolean isInWaitingArena(P player);
 }

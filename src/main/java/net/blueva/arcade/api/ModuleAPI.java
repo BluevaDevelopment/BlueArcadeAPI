@@ -11,6 +11,7 @@ import net.blueva.arcade.api.ui.MessageAPI;
 import net.blueva.arcade.api.ui.MenuAPI;
 import net.blueva.arcade.api.ui.VoteMenuAPI;
 import net.blueva.arcade.api.achievements.AchievementsAPI;
+import net.blueva.arcade.api.utils.PlayerUtil;
 import net.blueva.arcade.api.visuals.VisualEffectsAPI;
 
 /**
@@ -144,6 +145,15 @@ public class ModuleAPI {
     }
 
     /**
+     * Get PlayerUtil for player state checks outside a GameContext.
+     *
+     * @return PlayerUtil instance
+     */
+    public static PlayerUtil<?> getPlayerUtil() {
+        return provider != null ? provider.getPlayerUtil() : null;
+    }
+
+    /**
      * Interface implemented by the core plugin.
      */
     public interface ModuleAPIProvider {
@@ -159,5 +169,6 @@ public class ModuleAPI {
         ItemAPI<?, ?, ?> getItemAPI();
         MessageAPI<?> getMessagesAPI();
         VisualEffectsAPI getVisualEffectsAPI();
+        PlayerUtil<?> getPlayerUtil();
     }
 }
