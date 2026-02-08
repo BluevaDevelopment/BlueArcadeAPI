@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.0.0-2")
+    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.1")
 }
 ```
 
@@ -46,7 +46,7 @@ Full documentation available at: https://docs.blueva.net/
 
 ## Javadocs
 
-API reference documentation: https://blueva.net/docs/arcade/api
+API reference documentation: https://docs.blueva.net/arcade/api/
 You can also generate Javadocs locally by running:
 ```bash
 mvn -f BlueArcade-API/pom.xml javadoc:javadoc
