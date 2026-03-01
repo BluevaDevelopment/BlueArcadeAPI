@@ -10,7 +10,11 @@ package net.blueva.arcade.api.ui.menu;
  * @param <M> the material type (platform-specific)
  * @param javaItem the item definition for Java clients, or null
  * @param bedrockButton the button definition for Bedrock clients, or null
+ * @deprecated Since 3.2. Use
+ *   {@link net.blueva.arcade.api.ui.menu.minecraft.MCMenuEntry} instead.
+ *   This class is kept for backward compatibility with API 3.1 modules.
  */
+@Deprecated
 public record MenuEntry<M>(JavaItemDefinition<M> javaItem, BedrockButtonDefinition bedrockButton) {
     public static <M> MenuEntry<M> java(JavaItemDefinition<M> javaItem) {
         return new MenuEntry<>(javaItem, null);

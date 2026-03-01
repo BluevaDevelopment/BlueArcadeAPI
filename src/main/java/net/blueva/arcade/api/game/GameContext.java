@@ -297,6 +297,20 @@ public interface GameContext<P, L, W, M, I, S, B, E> {
      */
     MenuAPI<P, M> getMenuAPI();
 
+
+    /**
+     * Gets the experimental Hytale menu API for HyUI-backed custom pages.
+     * <p>
+     * Non-Hytale runtimes return {@code null}.
+     * </p>
+     *
+     * @return Hytale menu API or {@code null}
+     * @since 3.2
+     */
+    default HytaleMenuAPI<P> getHytaleMenuAPI() {
+        return null;
+    }
+
     /**
      * Gets the Core Config API for core settings.
      *

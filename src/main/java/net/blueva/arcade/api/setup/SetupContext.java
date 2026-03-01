@@ -1,6 +1,7 @@
 package net.blueva.arcade.api.setup;
 
 import net.blueva.arcade.api.ui.MessageAPI;
+import net.blueva.arcade.api.utils.SchedulerAPI;
 
 /**
  * Context passed to setup handlers when executing commands.
@@ -25,9 +26,35 @@ public class SetupContext<P, C, L> {
     private final SetupDataAPI<L> dataAPI;
     private final SetupSelectionAPI<P, L> selectionAPI;
     private final MessageAPI<P> messageAPI;
+    private final SchedulerAPI<?, L> schedulerAPI;
 
+    /**
+     * @deprecated Use the constructor that accepts a {@link SchedulerAPI} parameter instead.
+     */
+    @Deprecated
     public SetupContext(C sender, P player, int arenaId, String gameId, String[] args, int startIndex,
                         SetupDataAPI<L> dataAPI, SetupSelectionAPI<P, L> selectionAPI, MessageAPI<P> messageAPI) {
+        this(sender, player, arenaId, gameId, args, startIndex, dataAPI, selectionAPI, messageAPI, null);
+    }
+
+    /**
+     * Creates a new setup context.
+     *
+     * @param sender       the command sender (player or console)
+     * @param player       the player, or {@code null} if the sender is the console
+     * @param arenaId      the arena being configured
+     * @param gameId       the game module being configured
+     * @param args         full command arguments
+     * @param startIndex   index where handler-specific arguments start
+     * @param dataAPI      data API for saving/loading game configuration
+     * @param selectionAPI selection API for getting player position selections
+     * @param messageAPI   message API for sending formatted messages
+     * @param schedulerAPI scheduler API for running world-thread tasks from setup handlers
+     * @since 3.2
+     */
+    public SetupContext(C sender, P player, int arenaId, String gameId, String[] args, int startIndex,
+                        SetupDataAPI<L> dataAPI, SetupSelectionAPI<P, L> selectionAPI, MessageAPI<P> messageAPI,
+                        SchedulerAPI<?, L> schedulerAPI) {
         this.sender = sender;
         this.player = player;
         this.arenaId = arenaId;
@@ -37,6 +64,7 @@ public class SetupContext<P, C, L> {
         this.dataAPI = dataAPI;
         this.selectionAPI = selectionAPI;
         this.messageAPI = messageAPI;
+        this.schedulerAPI = schedulerAPI;
     }
 
     /**
@@ -139,5 +167,19 @@ public class SetupContext<P, C, L> {
 
     public MessageAPI<P> getMessagesAPI() {
         return messageAPI;
+    }
+
+    /**
+     * Get scheduler API for running world-thread tasks from setup handlers.
+     * <p>
+     * This allows setup handlers to schedule tasks on the world thread without
+     * having to use {@code world.execute()} directly.
+     * </p>
+     *
+     * @return the scheduler API, or {@code null} if not available
+     * @since 3.2
+     */
+    public SchedulerAPI<?, L> getSchedulerAPI() {
+        return schedulerAPI;
     }
 }

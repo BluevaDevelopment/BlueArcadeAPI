@@ -16,7 +16,11 @@ import java.util.List;
  * @param lore the list of lore lines
  * @param skullValue the base64 skull texture value (for player heads), or null
  * @param actions the list of action commands to execute when clicked
+ * @deprecated Since 3.2. Use
+ *   {@link net.blueva.arcade.api.ui.menu.minecraft.MCJavaItemDefinition} instead.
+ *   This class is kept for backward compatibility with API 3.1 modules.
  */
+@Deprecated
 public record JavaItemDefinition<M>(M material,
                                     int amount,
                                     String name,

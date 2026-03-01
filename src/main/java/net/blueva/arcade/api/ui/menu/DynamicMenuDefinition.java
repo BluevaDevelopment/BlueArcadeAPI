@@ -15,7 +15,11 @@ import java.util.List;
  * @param javaSlots the list of slots available for dynamic content in Java edition
  * @param staticItems the list of static items that remain fixed across all pages
  * @param bedrockMenu the menu definition for Bedrock clients
+ * @deprecated Since 3.2. Use
+ *   {@link net.blueva.arcade.api.ui.menu.minecraft.MCDynamicMenuDefinition} instead.
+ *   This class is kept for backward compatibility with API 3.1 modules.
  */
+@Deprecated
 public record DynamicMenuDefinition<M>(String javaTitle,
                                        int javaSize,
                                        List<Integer> javaSlots,

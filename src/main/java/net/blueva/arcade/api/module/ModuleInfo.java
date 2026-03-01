@@ -61,4 +61,18 @@ public interface ModuleInfo {
      * @return List of soft dependency module IDs
      */
     List<String> getSoftDepend();
+
+    /**
+     * Get the target platform declared in {@code module.yml}.
+     * <p>
+     * When the {@code platform} field is absent from the descriptor the module
+     * is considered cross-platform and this method returns {@code null}.
+     * </p>
+     *
+     * @return the target platform, or {@code null} if not declared (cross-platform)
+     * @since 3.2
+     */
+    default PlatformType getPlatform() {
+        return null;
+    }
 }

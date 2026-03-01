@@ -13,7 +13,11 @@ import java.util.List;
  * @param content the list of content/description lines
  * @param confirm the confirmation/yes button definition
  * @param cancel the cancellation/no button definition
+ * @deprecated Since 3.2. Use
+ *   {@link net.blueva.arcade.api.ui.menu.minecraft.MCBedrockModalMenuDefinition} instead.
+ *   This class is kept for backward compatibility with API 3.1 modules.
  */
+@Deprecated
 public record BedrockModalMenuDefinition(String title,
                                          List<String> content,
                                          BedrockButtonDefinition confirm,

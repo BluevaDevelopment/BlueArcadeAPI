@@ -58,14 +58,24 @@ public interface GameConfig<M> {
      * Checks if this game requires arena boundaries to be configured.
      *
      * @return true if bounds configuration is required, false otherwise
+     * @deprecated Since 3.2. Use {@link net.blueva.arcade.api.game.GameModule#getDisabledRequirements()}
+     *             with {@link net.blueva.arcade.api.setup.SetupRequirement#BOUNDS} instead.
+     *             This method is still consulted by the core when the module does not
+     *             use the new requirements API.
      */
+    @Deprecated
     boolean requiresBounds();
 
     /**
      * Checks if this game requires spawn points to be configured.
      *
      * @return true if spawns configuration is required, false otherwise
+     * @deprecated Since 3.2. Use {@link net.blueva.arcade.api.game.GameModule#getDisabledRequirements()}
+     *             with {@link net.blueva.arcade.api.setup.SetupRequirement#SPAWNS} instead.
+     *             This method is still consulted by the core when the module does not
+     *             use the new requirements API.
      */
+    @Deprecated
     boolean requiresSpawns();
 
     /**

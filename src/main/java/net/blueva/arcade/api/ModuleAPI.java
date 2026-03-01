@@ -6,6 +6,7 @@ import net.blueva.arcade.api.module.ModuleInfo;
 import net.blueva.arcade.api.store.StoreAPI;
 import net.blueva.arcade.api.stats.StatsAPI;
 import net.blueva.arcade.api.setup.GameSetupAPI;
+import net.blueva.arcade.api.ui.HytaleMenuAPI;
 import net.blueva.arcade.api.ui.ItemAPI;
 import net.blueva.arcade.api.ui.MessageAPI;
 import net.blueva.arcade.api.ui.MenuAPI;
@@ -56,6 +57,20 @@ public class ModuleAPI {
      */
     public static MenuAPI getMenuAPI() {
         return provider != null ? provider.getMenuAPI() : null;
+    }
+
+
+    /**
+     * Get the experimental Hytale Menu API for HyUI-backed custom pages.
+     * <p>
+     * This accessor may return {@code null} on non-Hytale platforms.
+     * </p>
+     *
+     * @return HytaleMenuAPI instance or {@code null}
+     * @since 3.2
+     */
+    public static HytaleMenuAPI getHytaleMenuAPI() {
+        return provider != null ? provider.getHytaleMenuAPI() : null;
     }
 
     /**
@@ -160,6 +175,20 @@ public class ModuleAPI {
         ModuleConfigAPI getModuleConfig(String moduleId);
         VoteMenuAPI getVoteMenuAPI();
         MenuAPI getMenuAPI();
+
+        /**
+         * Gets the experimental Hytale menu API provider.
+         * <p>
+         * Default implementation returns {@code null} for non-Hytale cores.
+         * </p>
+         *
+         * @return Hytale menu API or {@code null}
+         * @since 3.2
+         */
+        default HytaleMenuAPI getHytaleMenuAPI() {
+            return null;
+        }
+
         StoreAPI getStoreAPI();
         CoreConfigAPI getCoreConfig();
         ModuleInfo getModuleInfo(String moduleId);

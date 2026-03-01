@@ -12,7 +12,11 @@ import java.util.List;
  * @param text the button text displayed to players
  * @param imageUrl the URL to an image icon (optional), or null
  * @param actions the list of action commands to execute when clicked
+ * @deprecated Since 3.2. Use
+ *   {@link net.blueva.arcade.api.ui.menu.minecraft.MCBedrockButtonDefinition} instead.
+ *   This class is kept for backward compatibility with API 3.1 modules.
  */
+@Deprecated
 public record BedrockButtonDefinition(String text, String imageUrl, List<String> actions) {
 
     /**
