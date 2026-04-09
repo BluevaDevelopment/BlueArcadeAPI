@@ -91,4 +91,28 @@ public interface MenuAPI<P, M> {
      * @return true if the menu was opened successfully
      */
     boolean openMenuById(P player, String menuId);
+
+    /**
+     * Register a module-scoped MenuAPI implementation.
+     * The core will delegate openMenu() calls for the given module prefix to this handler.
+     * The default implementation is a no-op; override in core implementations.
+     *
+     * @param moduleId Module/game identifier (e.g. "skywars")
+     * @param handler  MenuAPI implementation that handles the module's own menus
+     * @since 3.3
+     */
+    default void registerModuleMenuAPI(String moduleId, MenuAPI<P, M> handler) {
+        // no-op by default; overridden in platform core implementations
+    }
+
+    /**
+     * Unregister a previously registered module MenuAPI.
+     * The default implementation is a no-op; override in core implementations.
+     *
+     * @param moduleId Module/game identifier
+     * @since 3.3
+     */
+    default void unregisterModuleMenuAPI(String moduleId) {
+        // no-op by default; overridden in platform core implementations
+    }
 }

@@ -24,7 +24,7 @@ Add the repository and dependency to your build tool.
     <dependency>
         <groupId>com.github.BluevaDevelopment</groupId>
         <artifactId>BlueArcadeAPI</artifactId>
-        <version>3.2</version>
+        <version>3.3</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.2")
+    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.3")
 }
 ```
 
@@ -46,7 +46,7 @@ Full documentation available at: https://docs.blueva.net/
 
 ## Javadocs
 
-API reference documentation: https://docs.blueva.net/arcade/api/
+API reference documentation: https://blueva.net/docs/arcade/api
 You can also generate Javadocs locally by running:
 ```bash
 mvn -f BlueArcade-API/pom.xml javadoc:javadoc

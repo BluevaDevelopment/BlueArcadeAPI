@@ -82,4 +82,27 @@ public interface ItemAPI<P, I, M> {
      * @return Formatted legacy title string for inventory creation
      */
     String formatInventoryTitle(String title);
+
+    /**
+     * Register a custom click handler for a lobby waiting item.
+     * The default implementation is a no-op; override in platform core implementations.
+     *
+     * @param itemId  Item ID (must match the ID used in {@link LobbyItemDefinition})
+     * @param handler Handler to execute on item click
+     * @since 3.3
+     */
+    default void registerClickHandler(String itemId, ItemClickHandler<P> handler) {
+        // no-op by default; overridden in platform core implementations
+    }
+
+    /**
+     * Unregister a previously registered click handler.
+     * The default implementation is a no-op; override in platform core implementations.
+     *
+     * @param itemId Item ID to unregister
+     * @since 3.3
+     */
+    default void unregisterClickHandler(String itemId) {
+        // no-op by default; overridden in platform core implementations
+    }
 }

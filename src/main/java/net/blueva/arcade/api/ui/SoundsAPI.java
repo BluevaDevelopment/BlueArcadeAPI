@@ -24,7 +24,14 @@ public interface SoundsAPI<P, L, S> {
 
     /**
      * Play NoteBlock song (.nbs file).
+     *
+     * @deprecated Use platform-specific APIs instead:
+     *             {@code MCSoundsAPI.playNBS} for Minecraft,
+     *             {@code HTSoundsAPI.playMIDI} for Hytale.
+     *             This method will be removed in a future major-version window.
+     * @since 3.3
      */
+    @Deprecated
     void playNBS(P player, String nbsFile);
 
     /**

@@ -30,6 +30,24 @@ public interface ModuleConfigAPI {
     boolean register(String fileName, int fileVersion);
 
     /**
+     * Register a config file using a copy-if-missing strategy.
+     * The bundled resource is copied to disk only when the user file does not exist.
+     * After that the file is loaded as-is without merging with bundled defaults, so
+     * any entries the admin deliberately removed are never restored.
+     * <p>
+     * The default implementation falls back to {@link #register(String, int)} with
+     * version {@code 1}. Platform core implementations override this with the real
+     * copy-if-missing logic.
+     *
+     * @param fileName Config file name relative to the module data folder (e.g. "kits.yml")
+     * @return true if the file was registered successfully
+     * @since 3.3
+     */
+    default boolean registerCopyOnly(String fileName) {
+        return register(fileName, 1);
+    }
+
+    /**
      * Reload a specific config file.
      *
      * @param fileName Config file name

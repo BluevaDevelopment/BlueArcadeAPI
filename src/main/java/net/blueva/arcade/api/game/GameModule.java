@@ -135,4 +135,17 @@ public interface GameModule<P, L, W, M, I, S, B, E, Ls, Pr> {
     default boolean allowJoinInProgress() {
         return false;
     }
+
+    /**
+     * Returns a human-readable display name for this module.
+     * The default implementation returns {@code null}, which signals the core to
+     * fall back to the module descriptor name or language.yml lookup.
+     * Override this to expose the display name from your own config (e.g. language.yml).
+     *
+     * @return display name, or {@code null} to use the descriptor fallback
+     * @since 3.3
+     */
+    default String getDisplayName() {
+        return null;
+    }
 }
