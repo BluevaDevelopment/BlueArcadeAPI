@@ -41,6 +41,16 @@ Each project includes:
 - Store: https://store.blueva.net/resources/resource/17-tnt-tag/
 - In-game: `/baa store module download tnt_tag`
 
+### Bridge Race
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_BridgeRace
+- Store: https://store.blueva.net/resources/resource/32-bridge-race/
+- In-game: `/baa store module download bridge_race`
+
+### Capture The Wool
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_CaptureTheWool
+- Store: https://store.blueva.net/resources/resource/29-capture-the-wool/
+- In-game: `/baa store module download capture_the_wool`
+
 ---
 
 ## Microgames
@@ -99,3 +109,23 @@ Each project includes:
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_Race
 - Store: https://store.blueva.net/resources/resource/9-race/
 - In-game: `/baa store module download race`
+
+### Chairs
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Chairs
+- Store: https://store.blueva.net/resources/resource/27-chairs/
+- In-game: `/baa store module download chairs`
+
+### Lucky Pillars
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_LuckyPillars
+- Store: https://store.blueva.net/resources/resource/28-lucky-pillars/
+- In-game: `/baa store module download lucky_pillars`
+
+### Splegg
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Splegg
+- Store: https://store.blueva.net/resources/resource/30-splegg/
+- In-game: `/baa store module download splegg`
+
+### Water Well
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_WaterWell
+- Store: https://store.blueva.net/resources/resource/31-water-well/
+- In-game: `/baa store module download water_well`
