@@ -1,6 +1,7 @@
 # Original Example Projects
 
-This document lists all official BlueArcade example projects.  
+This document lists all official BlueArcade example projects.
+
 Each project includes:
 
 - Source code on GitHub
@@ -11,121 +12,141 @@ Each project includes:
 
 ## Minigames
 
-### SkyWars
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_SkyWars
-- Store: https://store.blueva.net/resources/resource/25-skywars/
-- In-game: `/baa store module download skywars`
-
 ### Battle Royale
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_BattleRoyale
-- Store: https://store.blueva.net/resources/resource/24-battle-royale/
+- Store: https://blueva.net/store/blue-arcade/modules/battle_royale
 - In-game: `/baa store module download battle_royale`
 
-### TNT Run
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TNTRun
-- Store: https://store.blueva.net/resources/resource/23-tnt-run/
-- In-game: `/baa store module download tnt_run`
+### Bed Wars
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_BedWars
+- Store: https://blueva.net/store/blue-arcade/modules/bed_wars
+- In-game: `/baa store module download bed_wars`
 
 ### Block Party
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_BlockParty
-- Store: https://store.blueva.net/resources/resource/22-block-party/
+- Store: https://blueva.net/store/blue-arcade/modules/block_party
 - In-game: `/baa store module download block_party`
-
-### Run From The Beast
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_RunFromTheBeast
-- Store: https://store.blueva.net/resources/resource/21-run-from-the-beast/
-- In-game: `/baa store module download run_from_the_beast`
-
-### TNT Tag
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TNTTag
-- Store: https://store.blueva.net/resources/resource/17-tnt-tag/
-- In-game: `/baa store module download tnt_tag`
 
 ### Bridge Race
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_BridgeRace
-- Store: https://store.blueva.net/resources/resource/32-bridge-race/
+- Store: https://blueva.net/store/blue-arcade/modules/bridge_race
 - In-game: `/baa store module download bridge_race`
+
+### Build Battle
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_BuildBattle
+- Store: https://blueva.net/store/blue-arcade/modules/build_battle
+- In-game: `/baa store module download build_battle`
 
 ### Capture The Wool
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_CaptureTheWool
-- Store: https://store.blueva.net/resources/resource/29-capture-the-wool/
+- Store: https://blueva.net/store/blue-arcade/modules/capture_the_wool
 - In-game: `/baa store module download capture_the_wool`
+
+### Guess the Build
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_GuessTheBuild
+- Store: https://blueva.net/store/blue-arcade/modules/guess_the_build
+- In-game: `/baa store module download guess_the_build`
+
+### Lucky Pillars
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_LuckyPillars
+- Store: https://blueva.net/store/blue-arcade/modules/lucky_pillars
+- In-game: `/baa store module download lucky_pillars`
+
+### Run From The Beast
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_RunFromTheBeast
+- Store: https://blueva.net/store/blue-arcade/modules/run_from_the_beast
+- In-game: `/baa store module download run_from_the_beast`
+
+### SkyWars
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_SkyWars
+- Store: https://blueva.net/store/blue-arcade/modules/skywars
+- In-game: `/baa store module download skywars`
+
+### Speed Builders
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_SpeedBuilders
+- Store: https://blueva.net/store/blue-arcade/modules/speed_builders
+- In-game: `/baa store module download speed_builders`
+
+### TNT Run
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TNTRun
+- Store: https://blueva.net/store/blue-arcade/modules/tnt_run
+- In-game: `/baa store module download tnt_run`
+
+### TNT Tag
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TNTTag
+- Store: https://blueva.net/store/blue-arcade/modules/tnt_tag
+- In-game: `/baa store module download tnt_tag`
 
 ---
 
 ## Microgames
 
-### Traffic Light
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TrafficLight
-- Store: https://store.blueva.net/resources/resource/14-traffic-light/
-- In-game: `/baa store module download traffic_light`
+### All Against All
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_AllAgainstAll
+- Store: https://blueva.net/store/blue-arcade/modules/all_against_all
+- In-game: `/baa store module download all_against_all`
 
-### Spleef
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Spleef
-- Store: https://store.blueva.net/resources/resource/10-spleef-/
-- In-game: `/baa store module download spleef`
+### Chairs
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Chairs
+- Store: https://blueva.net/store/blue-arcade/modules/chairs
+- In-game: `/baa store module download chairs`
 
-### Snowball Fight
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_SnowballFight
-- Store: https://store.blueva.net/resources/resource/11-snowball-fight/
-- In-game: `/baa store module download snowball_fight`
+### Exploding Sheep
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_ExplodingSheep
+- Store: https://blueva.net/store/blue-arcade/modules/exploding_sheep
+- In-game: `/baa store module download exploding_sheep`
 
-### One In The Chamber
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_OneInTheChamber
-- Store: https://store.blueva.net/resources/resource/13-one-in-the-chamber/
-- In-game: `/baa store module download one_in_the_chamber`
+### Fast Zone
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_FastZone
+- Store: https://blueva.net/store/blue-arcade/modules/fast_zone
+- In-game: `/baa store module download fast_zone`
 
 ### Minefield
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_Minefield
-- Store: https://store.blueva.net/resources/resource/15-minefield/
+- Store: https://blueva.net/store/blue-arcade/modules/minefield
 - In-game: `/baa store module download minefield`
 
 ### Knockback
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_Knockback
-- Store: https://store.blueva.net/resources/resource/20-knockback/
+- Store: https://blueva.net/store/blue-arcade/modules/knockback
 - In-game: `/baa store module download knockback`
 
-### Fast Zone
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_FastZone
-- Store: https://store.blueva.net/resources/resource/19-fast-zone/
-- In-game: `/baa store module download fast_zone`
-
-### Red Alert
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_RedAlert
-- Store: https://store.blueva.net/resources/resource/18-red-alert/
-- In-game: `/baa store module download red_alert`
-
-### Exploding Sheep
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_ExplodingSheep
-- Store: https://store.blueva.net/resources/resource/16-exploding-sheep/
-- In-game: `/baa store module download exploding_sheep`
-
-### All Against All
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_AllAgainstAll
-- Store: https://store.blueva.net/resources/resource/12-all-against-all/
-- In-game: `/baa store module download all_against_all`
+### One In The Chamber
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_OneInTheChamber
+- Store: https://blueva.net/store/blue-arcade/modules/one_in_the_chamber
+- In-game: `/baa store module download one_in_the_chamber`
 
 ### Race
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_Race
-- Store: https://store.blueva.net/resources/resource/9-race/
+- Store: https://blueva.net/store/blue-arcade/modules/race
 - In-game: `/baa store module download race`
 
-### Chairs
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Chairs
-- Store: https://store.blueva.net/resources/resource/27-chairs/
-- In-game: `/baa store module download chairs`
+### Red Alert
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_RedAlert
+- Store: https://blueva.net/store/blue-arcade/modules/red_alert
+- In-game: `/baa store module download red_alert`
 
-### Lucky Pillars
-- GitHub: https://github.com/BluevaDevelopment/BlueArcade_LuckyPillars
-- Store: https://store.blueva.net/resources/resource/28-lucky-pillars/
-- In-game: `/baa store module download lucky_pillars`
+### Snowball Fight
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_SnowballFight
+- Store: https://blueva.net/store/blue-arcade/modules/snowball_fight
+- In-game: `/baa store module download snowball_fight`
+
+### Spleef
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_Spleef
+- Store: https://blueva.net/store/blue-arcade/modules/spleef
+- In-game: `/baa store module download spleef`
 
 ### Splegg
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_Splegg
-- Store: https://store.blueva.net/resources/resource/30-splegg/
+- Store: https://blueva.net/store/blue-arcade/modules/splegg
 - In-game: `/baa store module download splegg`
+
+### Traffic Light
+- GitHub: https://github.com/BluevaDevelopment/BlueArcade_TrafficLight
+- Store: https://blueva.net/store/blue-arcade/modules/traffic_light
+- In-game: `/baa store module download traffic_light`
 
 ### Water Well
 - GitHub: https://github.com/BluevaDevelopment/BlueArcade_WaterWell
-- Store: https://store.blueva.net/resources/resource/31-water-well/
+- Store: https://blueva.net/store/blue-arcade/modules/water_well
 - In-game: `/baa store module download water_well`
