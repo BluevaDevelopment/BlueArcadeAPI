@@ -42,12 +42,12 @@ dependencies {
 ```
 
 ## Documentation
-Full documentation available at: https://docs.blueva.net/
+Full documentation available at: https://blueva.net/docs/blue-arcade/index
 
 ## Javadocs
 
-API reference documentation: https://blueva.net/docs/arcade/api
+API reference documentation: https://blueva.net/docs/blue-arcade/javadoc/
 You can also generate Javadocs locally by running:
 ```bash
-mvn -f BlueArcade-API/pom.xml javadoc:javadoc
+mvn javadoc:javadoc
 ```
