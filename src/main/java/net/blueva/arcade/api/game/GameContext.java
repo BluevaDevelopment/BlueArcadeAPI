@@ -4,6 +4,7 @@ import net.blueva.arcade.api.arena.ArenaAPI;
 import net.blueva.arcade.api.config.*;
 import net.blueva.arcade.api.module.ModuleInfo;
 import net.blueva.arcade.api.player.GamePlayer;
+import net.blueva.arcade.api.player.PersistentPlayerDataAPI;
 import net.blueva.arcade.api.team.TeamsAPI;
 import net.blueva.arcade.api.ui.*;
 import net.blueva.arcade.api.utils.PlayerUtil;
@@ -110,6 +111,30 @@ public interface GameContext<P, L, W, M, I, S, B, E> {
      * @return true if the player is in PLAYING state
      */
     boolean isPlayerPlaying(P player);
+
+    /**
+     * Marks whether a player is currently spectating this game.
+     * <p>
+     * Modules should use this method instead of changing the native platform
+     * spectator mode directly. The Core may represent spectators with a
+     * custom state, visibility, inventory, and movement policy.
+     * </p>
+     *
+     * @param player the player to update
+     * @param spectating true to move the player to spectator state, false to restore playing state
+     */
+    default void setPlayerSpectating(P player, boolean spectating) {
+    }
+
+    /**
+     * Checks whether a player is currently spectating this game.
+     *
+     * @param player the player to check
+     * @return true if the player is spectating
+     */
+    default boolean isPlayerSpectating(P player) {
+        return getSpectators().contains(player);
+    }
 
     // === PLAYERS ===
 
@@ -325,6 +350,26 @@ public interface GameContext<P, L, W, M, I, S, B, E> {
      * @return ModuleConfigAPI instance for this game module
      */
     ModuleConfigAPI getModuleConfig();
+
+    /**
+     * Gets the player data API for module-scoped persistent player data.
+     *
+     * @return player data API, or {@code null} if not supported by this runtime
+     * @since 3.4
+     */
+    default PersistentPlayerDataAPI<P> getPersistentPlayerDataAPI() {
+        return null;
+    }
+
+    /**
+     * Gets the language API for locale-aware module translations.
+     *
+     * @return language API, or {@code null} if not supported by this runtime
+     * @since 3.4
+     */
+    default LanguageAPI<P> getLanguageAPI() {
+        return null;
+    }
 
     /**
      * Get module metadata from module.yml.

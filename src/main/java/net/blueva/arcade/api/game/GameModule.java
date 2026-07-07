@@ -1,6 +1,7 @@
 package net.blueva.arcade.api.game;
 
 import net.blueva.arcade.api.events.CustomEventRegistry;
+import net.blueva.arcade.api.setup.ModuleSetupMetadata;
 import net.blueva.arcade.api.setup.SetupRequirement;
 
 import java.util.Collections;
@@ -147,5 +148,37 @@ public interface GameModule<P, L, W, M, I, S, B, E, Ls, Pr> {
      */
     default String getDisplayName() {
         return null;
+    }
+
+    /**
+     * Returns optional declarative install/setup metadata for this module.
+     * <p>
+     * Metadata is used by the core to enrich admin help, setup status checklists,
+     * and diagnostics. It does not replace setup command handlers or validation.
+     * Existing modules can ignore this method and will keep working unchanged.
+     * </p>
+     *
+     * @return setup metadata, empty by default
+     * @since 3.4
+     */
+    default ModuleSetupMetadata getSetupMetadata() {
+        return ModuleSetupMetadata.empty();
+    }
+
+    /**
+     * Returns whether the core should require enough configured spawn points
+     * for this module before the game can be enabled.
+     * <p>
+     * Returning {@code false} keeps core spawn setup commands available, but
+     * disables only the numeric one-spawn-per-player capacity check. Use
+     * {@link #getDisabledRequirements()} with {@link SetupRequirement#SPAWNS}
+     * when the module does not use the core spawn requirement at all.
+     * </p>
+     *
+     * @return {@code true} by default for backward-compatible validation
+     * @since 3.4
+     */
+    default boolean requiresSpawnCapacityValidation() {
+        return true;
     }
 }

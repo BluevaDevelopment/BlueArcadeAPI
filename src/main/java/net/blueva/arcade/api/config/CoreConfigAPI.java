@@ -7,7 +7,7 @@ import java.util.Map;
  * API for accessing core plugin configuration files.
  * Provides access to settings.yml, messages.yml, sounds.yml, rewards.yml, etc.
  *
- * Uses BoostedYaml internally (no dependency needed in modules).
+ * Uses the platform configuration backend internally (no YAML dependency needed in modules).
  */
 public interface CoreConfigAPI {
 
@@ -74,6 +74,39 @@ public interface CoreConfigAPI {
     String getLanguage(String key);
 
     /**
+     * Get message from messages/language file for a specific platform player.
+     * <p>
+     * The player parameter is intentionally typed as {@code Object} so the public
+     * API remains platform-neutral. Runtimes that support per-player languages
+     * should override this method and inspect their native player type.
+     * </p>
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key Message key
+     * @return Message string
+     * @since 3.4
+     */
+    default String getLanguage(Object player, String key) {
+        return getLanguage(key);
+    }
+
+    /**
+     * Get player-specific message with placeholders replaced.
+     *
+     * @since 3.4
+     */
+    default String getLanguage(Object player, String key, Map<String, String> placeholders) {
+        String message = getLanguage(player, key);
+        if (message == null || message.isBlank() || placeholders == null || placeholders.isEmpty()) {
+            return message;
+        }
+        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+            message = message.replace("{" + entry.getKey() + "}", entry.getValue());
+        }
+        return message;
+    }
+
+    /**
      * Get message with placeholders replaced.
      *
      * @param key Message key
@@ -89,6 +122,35 @@ public interface CoreConfigAPI {
      * @return List of message lines
      */
     List<String> getLanguageList(String key);
+
+    /**
+     * Get player-specific message list.
+     *
+     * @since 3.4
+     */
+    default List<String> getLanguageList(Object player, String key) {
+        return getLanguageList(key);
+    }
+
+    /**
+     * Get player-specific message list with placeholders.
+     *
+     * @since 3.4
+     */
+    default List<String> getLanguageList(Object player, String key, Map<String, String> placeholders) {
+        List<String> messages = getLanguageList(player, key);
+        if (messages == null || messages.isEmpty() || placeholders == null || placeholders.isEmpty()) {
+            return messages;
+        }
+        List<String> result = new java.util.ArrayList<>();
+        for (String line : messages) {
+            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                line = line.replace("{" + entry.getKey() + "}", entry.getValue());
+            }
+            result.add(line);
+        }
+        return result;
+    }
 
     /**
      * Get message list with placeholders.

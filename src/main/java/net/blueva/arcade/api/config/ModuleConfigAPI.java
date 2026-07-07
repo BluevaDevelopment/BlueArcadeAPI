@@ -2,12 +2,13 @@ package net.blueva.arcade.api.config;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 /**
  * API for managing multiple configuration files per module.
  * Each module can have settings.yml, items.yml, rewards.yml, etc.
  *
- * Uses BoostedYaml internally (no dependency needed in modules).
+ * Uses the platform configuration backend internally (no YAML dependency needed in modules).
  */
 public interface ModuleConfigAPI {
 
@@ -21,12 +22,18 @@ public interface ModuleConfigAPI {
     boolean register(String fileName);
 
     /**
-     * Register a config with custom file version for auto-updates.
+     * Register a config with legacy file-version compatibility.
+     * Modern platform implementations ignore {@code fileVersion}; it is kept
+     * only so modules compiled against BlueArcade 3.3 and older continue to
+     * load without changes.
      *
      * @param fileName Config file name
-     * @param fileVersion Version for auto-update system
+     * @param fileVersion Legacy version hint
      * @return true if registered successfully
+     * @deprecated since 3.4, use {@link #register(String)}. BlueArcade no longer
+     * uses {@code file_version} / {@code file-version} metadata in module files.
      */
+    @Deprecated(since = "3.4", forRemoval = false)
     boolean register(String fileName, int fileVersion);
 
     /**
@@ -35,16 +42,15 @@ public interface ModuleConfigAPI {
      * After that the file is loaded as-is without merging with bundled defaults, so
      * any entries the admin deliberately removed are never restored.
      * <p>
-     * The default implementation falls back to {@link #register(String, int)} with
-     * version {@code 1}. Platform core implementations override this with the real
-     * copy-if-missing logic.
+     * The default implementation falls back to {@link #register(String)}.
+     * Platform core implementations override this with the real copy-if-missing logic.
      *
      * @param fileName Config file name relative to the module data folder (e.g. "kits.yml")
      * @return true if the file was registered successfully
      * @since 3.3
      */
     default boolean registerCopyOnly(String fileName) {
-        return register(fileName, 1);
+        return register(fileName);
     }
 
     /**
@@ -204,6 +210,136 @@ public interface ModuleConfigAPI {
      */
     boolean containsFrom(String fileName, String path);
 
+    /**
+     * Look up a translated string for this module using the runtime language API
+     * when available.
+     * <p>
+     * The default implementation preserves legacy behavior by reading from the
+     * module's single {@code language.yml} file.
+     * </p>
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @return translated value or the raw key when missing
+     * @since 3.4
+     */
+    default String getTranslation(Object player, String key) {
+        String value = getStringFrom("language.yml", key);
+        return value != null ? value : key;
+    }
+
+    /**
+     * Look up a translated string and replace MiniMessage placeholder tokens.
+     * Placeholders are passed as pairs: {@code "{name}", "value"}.
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @param placeholders placeholder pairs
+     * @return translated value or the raw key when missing
+     * @since 3.4
+     */
+    default String getTranslation(Object player, String key, String... placeholders) {
+        return replaceTranslationPlaceholders(getTranslation(player, key), placeholders);
+    }
+
+    /**
+     * Look up a translated string and replace MiniMessage placeholder tokens.
+     * Placeholder keys are used exactly as supplied, e.g. {@code "{name}"}.
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @param placeholders placeholder map
+     * @return translated value or the raw key when missing
+     * @since 3.4
+     */
+    default String getTranslation(Object player, String key, Map<String, String> placeholders) {
+        return replaceTranslationPlaceholders(getTranslation(player, key), placeholders);
+    }
+
+    /**
+     * Look up a translated string and return a caller-provided fallback when missing.
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @param defaultValue fallback returned when the translation is missing
+     * @return translated value or {@code defaultValue}
+     * @since 3.4
+     */
+    default String getTranslationOrDefault(Object player, String key, String defaultValue) {
+        String value = getTranslation(player, key);
+        return value == null || value.equals(key) ? defaultValue : value;
+    }
+
+    default String getTranslationOrDefault(Object player, String key, String defaultValue, String... placeholders) {
+        return replaceTranslationPlaceholders(getTranslationOrDefault(player, key, defaultValue), placeholders);
+    }
+
+    default String getTranslationOrDefault(Object player, String key, String defaultValue, Map<String, String> placeholders) {
+        return replaceTranslationPlaceholders(getTranslationOrDefault(player, key, defaultValue), placeholders);
+    }
+
+    /**
+     * Look up a translated string list for this module using the runtime language API
+     * when available. This is intended for scoreboards, menu lore, multi-line result
+     * messages, and other localized lists.
+     * <p>
+     * The default implementation preserves legacy behavior by reading from the
+     * module's single {@code language.yml} file.
+     * </p>
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @return translated list, or an empty list when missing
+     * @since 3.4
+     */
+    default List<String> getTranslationList(Object player, String key) {
+        List<String> value = getStringListFrom("language.yml", key);
+        return value != null ? value : List.of();
+    }
+
+    /**
+     * Look up a translated string list and replace MiniMessage placeholder tokens.
+     * Placeholders are passed as pairs: {@code "{name}", "value"}.
+     *
+     * @param player platform player, or {@code null} to use the server default locale
+     * @param key translation key
+     * @param placeholders placeholder pairs
+     * @return translated list, or an empty list when missing
+     * @since 3.4
+     */
+    default List<String> getTranslationList(Object player, String key, String... placeholders) {
+        List<String> values = getTranslationList(player, key);
+        if (placeholders == null || placeholders.length == 0 || values.isEmpty()) {
+            return values;
+        }
+        return values.stream().map(value -> replaceTranslationPlaceholders(value, placeholders)).toList();
+    }
+
+    default List<String> getTranslationList(Object player, String key, Map<String, String> placeholders) {
+        List<String> values = getTranslationList(player, key);
+        if (placeholders == null || placeholders.isEmpty() || values.isEmpty()) {
+            return values;
+        }
+        return values.stream().map(value -> replaceTranslationPlaceholders(value, placeholders)).toList();
+    }
+
+    default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue) {
+        List<String> values = getTranslationList(player, key);
+        return values == null || values.isEmpty() ? defaultValue : values;
+    }
+
+    default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue, String... placeholders) {
+        return getTranslationListOrDefault(player, key, defaultValue).stream()
+                .map(value -> replaceTranslationPlaceholders(value, placeholders))
+                .toList();
+    }
+
+    default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue, Map<String, String> placeholders) {
+        return getTranslationListOrDefault(player, key, defaultValue).stream()
+                .map(value -> replaceTranslationPlaceholders(value, placeholders))
+                .toList();
+    }
+
     // ===== SET METHODS (for runtime modification) =====
 
     /**
@@ -215,4 +351,28 @@ public interface ModuleConfigAPI {
      * Set value in a specific config file.
      */
     void setIn(String fileName, String path, Object value);
+
+    private static String replaceTranslationPlaceholders(String value, String... placeholders) {
+        if (value == null || placeholders == null) {
+            return value;
+        }
+        String result = value;
+        for (int i = 0; i + 1 < placeholders.length; i += 2) {
+            result = result.replace(placeholders[i], placeholders[i + 1]);
+        }
+        return result;
+    }
+
+    private static String replaceTranslationPlaceholders(String value, Map<String, String> placeholders) {
+        if (value == null || placeholders == null || placeholders.isEmpty()) {
+            return value;
+        }
+        String result = value;
+        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+            if (entry.getKey() != null && entry.getValue() != null) {
+                result = result.replace(entry.getKey(), entry.getValue());
+            }
+        }
+        return result;
+    }
 }

@@ -1,8 +1,10 @@
 package net.blueva.arcade.api;
 
 import net.blueva.arcade.api.config.CoreConfigAPI;
+import net.blueva.arcade.api.config.LanguageAPI;
 import net.blueva.arcade.api.config.ModuleConfigAPI;
 import net.blueva.arcade.api.module.ModuleInfo;
+import net.blueva.arcade.api.player.PersistentPlayerDataAPI;
 import net.blueva.arcade.api.store.StoreAPI;
 import net.blueva.arcade.api.stats.StatsAPI;
 import net.blueva.arcade.api.setup.GameSetupAPI;
@@ -169,6 +171,26 @@ public class ModuleAPI {
     }
 
     /**
+     * Get PersistentPlayerDataAPI for module-scoped persistent player data.
+     *
+     * @return PersistentPlayerDataAPI instance, or {@code null} if unavailable
+     * @since 3.4
+     */
+    public static PersistentPlayerDataAPI<?> getPersistentPlayerDataAPI() {
+        return provider != null ? provider.getPersistentPlayerDataAPI() : null;
+    }
+
+    /**
+     * Get LanguageAPI for locale-aware module translations.
+     *
+     * @return LanguageAPI instance, or {@code null} if unavailable
+     * @since 3.4
+     */
+    public static LanguageAPI<?> getLanguageAPI() {
+        return provider != null ? provider.getLanguageAPI() : null;
+    }
+
+    /**
      * Interface implemented by the core plugin.
      */
     public interface ModuleAPIProvider {
@@ -199,5 +221,25 @@ public class ModuleAPI {
         MessageAPI<?> getMessagesAPI();
         VisualEffectsAPI getVisualEffectsAPI();
         PlayerUtil<?> getPlayerUtil();
+
+        /**
+         * Gets the player data API provider.
+         *
+         * @return player data API or {@code null} if unsupported
+         * @since 3.4
+         */
+        default PersistentPlayerDataAPI<?> getPersistentPlayerDataAPI() {
+            return null;
+        }
+
+        /**
+         * Gets the language API provider.
+         *
+         * @return language API or {@code null} if unsupported
+         * @since 3.4
+         */
+        default LanguageAPI<?> getLanguageAPI() {
+            return null;
+        }
     }
 }
