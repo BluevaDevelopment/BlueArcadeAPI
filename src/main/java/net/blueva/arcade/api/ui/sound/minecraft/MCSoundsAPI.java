@@ -4,7 +4,7 @@ import net.blueva.arcade.api.ui.SoundsAPI;
 
 /**
  * Minecraft-specific extension of {@link SoundsAPI}.
- * Provides NoteBlock song (.nbs) playback via NoteBlockAPI.
+ * Provides built-in note-block song (.nbs) playback.
  *
  * @since 3.3
  */
