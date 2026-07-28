@@ -138,6 +138,33 @@ public interface GameModule<P, L, W, M, I, S, B, E, Ls, Pr> {
     }
 
     /**
+     * Called when a player joins an already-running match, right after the core has
+     * registered them in this game's {@link GameContext}.
+     * <p>
+     * Only invoked when {@link #allowJoinInProgress()} returned {@code true} for the
+     * arena. The module is responsible for actually placing the player into the match
+     * (team assignment, teleporting them into the game world, equipping their loadout,
+     * etc.) — the core does not do this on its behalf, since it is entirely
+     * game-specific.
+     * </p>
+     * <p>
+     * Return {@code false} to reject the join-in-progress attempt (e.g. every team is
+     * already full). When rejected, the core undoes the registration and notifies the
+     * player instead of leaving them stuck in a half-joined state. The default
+     * implementation always rejects, since a module that never overrides this method
+     * has no way to actually place the player into the match.
+     * </p>
+     *
+     * @param context Game context with all APIs
+     * @param player the player joining the running match
+     * @return {@code true} if the player was placed into the match successfully
+     * @since 3.4
+     */
+    default boolean onPlayerJoinInProgress(GameContext<P, L, W, M, I, S, B, E> context, P player) {
+        return false;
+    }
+
+    /**
      * Returns a human-readable display name for this module.
      * The default implementation returns {@code null}, which signals the core to
      * fall back to the module descriptor name or language.yml lookup.
