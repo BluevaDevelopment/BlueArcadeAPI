@@ -24,7 +24,7 @@ Add the repository and dependency to your build tool.
     <dependency>
         <groupId>com.github.BluevaDevelopment</groupId>
         <artifactId>BlueArcadeAPI</artifactId>
-        <version>3.4</version>
+        <version>3.5</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.4")
+    compileOnly("com.github.BluevaDevelopment:BlueArcadeAPI:3.5")
 }
 ```
 
