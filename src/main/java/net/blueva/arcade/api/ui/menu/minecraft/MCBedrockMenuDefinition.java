@@ -11,8 +11,7 @@ import java.util.List;
  *
  * @since 3.2
  */
-public sealed interface MCBedrockMenuDefinition
-        permits MCBedrockModalMenuDefinition, MCBedrockSimpleMenuDefinition {
+public interface MCBedrockMenuDefinition {
 
     /** Gets the menu title. */
     String title();

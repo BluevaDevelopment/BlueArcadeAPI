@@ -17,10 +17,65 @@ import java.util.List;
  * @param actions the list of action commands to execute when clicked
  * @since 3.2
  */
-public record HytaleButtonDefinition(String selector,
-                                     String text,
-                                     String imageAsset,
-                                     List<String> actions) {
+public final class HytaleButtonDefinition {
+
+    private final String selector;
+    private final String text;
+    private final String imageAsset;
+    private final List<String> actions;
+
+    public HytaleButtonDefinition(String selector, String text, String imageAsset, List<String> actions) {
+        this.selector = selector;
+        this.text = text;
+        this.imageAsset = imageAsset;
+        this.actions = actions;
+    }
+
+    public String selector() {
+        return this.selector;
+    }
+
+    public String text() {
+        return this.text;
+    }
+
+    public String imageAsset() {
+        return this.imageAsset;
+    }
+
+    public List<String> actions() {
+        return this.actions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HytaleButtonDefinition)) {
+            return false;
+        }
+        HytaleButtonDefinition other = (HytaleButtonDefinition) o;
+        return java.util.Objects.equals(this.selector, other.selector)
+            && java.util.Objects.equals(this.text, other.text)
+            && java.util.Objects.equals(this.imageAsset, other.imageAsset)
+            && java.util.Objects.equals(this.actions, other.actions);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(selector, text, imageAsset, actions);
+    }
+
+    @Override
+    public String toString() {
+        return "HytaleButtonDefinition[" +
+            "selector=" + this.selector + ", " +
+            "text=" + this.text + ", " +
+            "imageAsset=" + this.imageAsset + ", " +
+            "actions=" + this.actions +
+            "]";
+    }
 
     /**
      * Creates a button without an image.

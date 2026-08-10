@@ -13,9 +13,57 @@ package net.blueva.arcade.api.ui.menu.hytale;
  * @param defaultValue the default value to set when the menu opens, or {@code null}
  * @since 3.2
  */
-public record HytaleUIElement(String selector,
-                              String property,
-                              String defaultValue) {
+public final class HytaleUIElement {
+
+    private final String selector;
+    private final String property;
+    private final String defaultValue;
+
+    public HytaleUIElement(String selector, String property, String defaultValue) {
+        this.selector = selector;
+        this.property = property;
+        this.defaultValue = defaultValue;
+    }
+
+    public String selector() {
+        return this.selector;
+    }
+
+    public String property() {
+        return this.property;
+    }
+
+    public String defaultValue() {
+        return this.defaultValue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HytaleUIElement)) {
+            return false;
+        }
+        HytaleUIElement other = (HytaleUIElement) o;
+        return java.util.Objects.equals(this.selector, other.selector)
+            && java.util.Objects.equals(this.property, other.property)
+            && java.util.Objects.equals(this.defaultValue, other.defaultValue);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(selector, property, defaultValue);
+    }
+
+    @Override
+    public String toString() {
+        return "HytaleUIElement[" +
+            "selector=" + this.selector + ", " +
+            "property=" + this.property + ", " +
+            "defaultValue=" + this.defaultValue +
+            "]";
+    }
 
     /**
      * Creates a text element with a default value.

@@ -15,7 +15,50 @@ package net.blueva.arcade.api.ui.menu;
  *   This class is kept for backward compatibility with API 3.1 modules.
  */
 @Deprecated
-public record MenuEntry<M>(JavaItemDefinition<M> javaItem, BedrockButtonDefinition bedrockButton) {
+public final class MenuEntry<M> {
+
+    private final JavaItemDefinition<M> javaItem;
+    private final BedrockButtonDefinition bedrockButton;
+
+    public MenuEntry(JavaItemDefinition<M> javaItem, BedrockButtonDefinition bedrockButton) {
+        this.javaItem = javaItem;
+        this.bedrockButton = bedrockButton;
+    }
+
+    public JavaItemDefinition<M> javaItem() {
+        return this.javaItem;
+    }
+
+    public BedrockButtonDefinition bedrockButton() {
+        return this.bedrockButton;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MenuEntry)) {
+            return false;
+        }
+        MenuEntry<?> other = (MenuEntry<?>) o;
+        return java.util.Objects.equals(this.javaItem, other.javaItem)
+            && java.util.Objects.equals(this.bedrockButton, other.bedrockButton);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(javaItem, bedrockButton);
+    }
+
+    @Override
+    public String toString() {
+        return "MenuEntry[" +
+            "javaItem=" + this.javaItem + ", " +
+            "bedrockButton=" + this.bedrockButton +
+            "]";
+    }
+
     public static <M> MenuEntry<M> java(JavaItemDefinition<M> javaItem) {
         return new MenuEntry<>(javaItem, null);
     }

@@ -14,7 +14,7 @@ import java.util.List;
  *   This interface is kept for backward compatibility with API 3.1 modules.
  */
 @Deprecated
-public sealed interface BedrockMenuDefinition permits BedrockModalMenuDefinition, BedrockSimpleMenuDefinition {
+public interface BedrockMenuDefinition {
     /**
      * Gets the menu title.
      *

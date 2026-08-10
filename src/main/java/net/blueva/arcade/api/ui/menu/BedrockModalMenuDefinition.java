@@ -18,8 +18,63 @@ import java.util.List;
  *   This class is kept for backward compatibility with API 3.1 modules.
  */
 @Deprecated
-public record BedrockModalMenuDefinition(String title,
-                                         List<String> content,
-                                         BedrockButtonDefinition confirm,
-                                         BedrockButtonDefinition cancel) implements BedrockMenuDefinition {
+public final class BedrockModalMenuDefinition implements BedrockMenuDefinition {
+
+    private final String title;
+    private final List<String> content;
+    private final BedrockButtonDefinition confirm;
+    private final BedrockButtonDefinition cancel;
+
+    public BedrockModalMenuDefinition(String title, List<String> content, BedrockButtonDefinition confirm, BedrockButtonDefinition cancel) {
+        this.title = title;
+        this.content = content;
+        this.confirm = confirm;
+        this.cancel = cancel;
+    }
+
+    public String title() {
+        return this.title;
+    }
+
+    public List<String> content() {
+        return this.content;
+    }
+
+    public BedrockButtonDefinition confirm() {
+        return this.confirm;
+    }
+
+    public BedrockButtonDefinition cancel() {
+        return this.cancel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BedrockModalMenuDefinition)) {
+            return false;
+        }
+        BedrockModalMenuDefinition other = (BedrockModalMenuDefinition) o;
+        return java.util.Objects.equals(this.title, other.title)
+            && java.util.Objects.equals(this.content, other.content)
+            && java.util.Objects.equals(this.confirm, other.confirm)
+            && java.util.Objects.equals(this.cancel, other.cancel);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(title, content, confirm, cancel);
+    }
+
+    @Override
+    public String toString() {
+        return "BedrockModalMenuDefinition[" +
+            "title=" + this.title + ", " +
+            "content=" + this.content + ", " +
+            "confirm=" + this.confirm + ", " +
+            "cancel=" + this.cancel +
+            "]";
+    }
 }

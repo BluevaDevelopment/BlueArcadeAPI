@@ -21,12 +21,81 @@ import java.util.List;
  *   This class is kept for backward compatibility with API 3.1 modules.
  */
 @Deprecated
-public record JavaItemDefinition<M>(M material,
-                                    int amount,
-                                    String name,
-                                    List<String> lore,
-                                    String skullValue,
-                                    List<String> actions) {
+public final class JavaItemDefinition<M> {
+
+    private final M material;
+    private final int amount;
+    private final String name;
+    private final List<String> lore;
+    private final String skullValue;
+    private final List<String> actions;
+
+    public JavaItemDefinition(M material, int amount, String name, List<String> lore, String skullValue, List<String> actions) {
+        this.material = material;
+        this.amount = amount;
+        this.name = name;
+        this.lore = lore;
+        this.skullValue = skullValue;
+        this.actions = actions;
+    }
+
+    public M material() {
+        return this.material;
+    }
+
+    public int amount() {
+        return this.amount;
+    }
+
+    public String name() {
+        return this.name;
+    }
+
+    public List<String> lore() {
+        return this.lore;
+    }
+
+    public String skullValue() {
+        return this.skullValue;
+    }
+
+    public List<String> actions() {
+        return this.actions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof JavaItemDefinition)) {
+            return false;
+        }
+        JavaItemDefinition<?> other = (JavaItemDefinition<?>) o;
+        return java.util.Objects.equals(this.material, other.material)
+            && this.amount == other.amount
+            && java.util.Objects.equals(this.name, other.name)
+            && java.util.Objects.equals(this.lore, other.lore)
+            && java.util.Objects.equals(this.skullValue, other.skullValue)
+            && java.util.Objects.equals(this.actions, other.actions);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(material, amount, name, lore, skullValue, actions);
+    }
+
+    @Override
+    public String toString() {
+        return "JavaItemDefinition[" +
+            "material=" + this.material + ", " +
+            "amount=" + this.amount + ", " +
+            "name=" + this.name + ", " +
+            "lore=" + this.lore + ", " +
+            "skullValue=" + this.skullValue + ", " +
+            "actions=" + this.actions +
+            "]";
+    }
 
     public static <M> JavaItemDefinition<M> of(M material, String name, List<String> lore, List<String> actions) {
         return new JavaItemDefinition<>(material, 1, name, lore, null, actions);

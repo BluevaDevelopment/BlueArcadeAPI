@@ -10,7 +10,57 @@ import java.util.List;
  * @param actions the list of action commands to execute when clicked
  * @since 3.2
  */
-public record MCBedrockButtonDefinition(String text, String imageUrl, List<String> actions) {
+public final class MCBedrockButtonDefinition {
+
+    private final String text;
+    private final String imageUrl;
+    private final List<String> actions;
+
+    public MCBedrockButtonDefinition(String text, String imageUrl, List<String> actions) {
+        this.text = text;
+        this.imageUrl = imageUrl;
+        this.actions = actions;
+    }
+
+    public String text() {
+        return this.text;
+    }
+
+    public String imageUrl() {
+        return this.imageUrl;
+    }
+
+    public List<String> actions() {
+        return this.actions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MCBedrockButtonDefinition)) {
+            return false;
+        }
+        MCBedrockButtonDefinition other = (MCBedrockButtonDefinition) o;
+        return java.util.Objects.equals(this.text, other.text)
+            && java.util.Objects.equals(this.imageUrl, other.imageUrl)
+            && java.util.Objects.equals(this.actions, other.actions);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(text, imageUrl, actions);
+    }
+
+    @Override
+    public String toString() {
+        return "MCBedrockButtonDefinition[" +
+            "text=" + this.text + ", " +
+            "imageUrl=" + this.imageUrl + ", " +
+            "actions=" + this.actions +
+            "]";
+    }
 
     public static MCBedrockButtonDefinition of(String text, List<String> actions) {
         return new MCBedrockButtonDefinition(text, null, actions);

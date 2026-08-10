@@ -19,11 +19,73 @@ import java.util.List;
  * @param dismissable whether the player can dismiss the UI without triggering an action
  * @since 3.2
  */
-public record HytaleMenuDefinition(String layoutPath,
-                                   String title,
-                                   List<HytaleUIElement> elements,
-                                   List<HytaleUIEventBinding> eventBindings,
-                                   boolean dismissable) {
+public final class HytaleMenuDefinition {
+
+    private final String layoutPath;
+    private final String title;
+    private final List<HytaleUIElement> elements;
+    private final List<HytaleUIEventBinding> eventBindings;
+    private final boolean dismissable;
+
+    public HytaleMenuDefinition(String layoutPath, String title, List<HytaleUIElement> elements, List<HytaleUIEventBinding> eventBindings, boolean dismissable) {
+        this.layoutPath = layoutPath;
+        this.title = title;
+        this.elements = elements;
+        this.eventBindings = eventBindings;
+        this.dismissable = dismissable;
+    }
+
+    public String layoutPath() {
+        return this.layoutPath;
+    }
+
+    public String title() {
+        return this.title;
+    }
+
+    public List<HytaleUIElement> elements() {
+        return this.elements;
+    }
+
+    public List<HytaleUIEventBinding> eventBindings() {
+        return this.eventBindings;
+    }
+
+    public boolean dismissable() {
+        return this.dismissable;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof HytaleMenuDefinition)) {
+            return false;
+        }
+        HytaleMenuDefinition other = (HytaleMenuDefinition) o;
+        return java.util.Objects.equals(this.layoutPath, other.layoutPath)
+            && java.util.Objects.equals(this.title, other.title)
+            && java.util.Objects.equals(this.elements, other.elements)
+            && java.util.Objects.equals(this.eventBindings, other.eventBindings)
+            && this.dismissable == other.dismissable;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(layoutPath, title, elements, eventBindings, dismissable);
+    }
+
+    @Override
+    public String toString() {
+        return "HytaleMenuDefinition[" +
+            "layoutPath=" + this.layoutPath + ", " +
+            "title=" + this.title + ", " +
+            "elements=" + this.elements + ", " +
+            "eventBindings=" + this.eventBindings + ", " +
+            "dismissable=" + this.dismissable +
+            "]";
+    }
 
     /**
      * Creates a simple dismissable menu definition.

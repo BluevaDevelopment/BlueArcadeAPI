@@ -17,7 +17,57 @@ import java.util.List;
  *   This class is kept for backward compatibility with API 3.1 modules.
  */
 @Deprecated
-public record BedrockButtonDefinition(String text, String imageUrl, List<String> actions) {
+public final class BedrockButtonDefinition {
+
+    private final String text;
+    private final String imageUrl;
+    private final List<String> actions;
+
+    public BedrockButtonDefinition(String text, String imageUrl, List<String> actions) {
+        this.text = text;
+        this.imageUrl = imageUrl;
+        this.actions = actions;
+    }
+
+    public String text() {
+        return this.text;
+    }
+
+    public String imageUrl() {
+        return this.imageUrl;
+    }
+
+    public List<String> actions() {
+        return this.actions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BedrockButtonDefinition)) {
+            return false;
+        }
+        BedrockButtonDefinition other = (BedrockButtonDefinition) o;
+        return java.util.Objects.equals(this.text, other.text)
+            && java.util.Objects.equals(this.imageUrl, other.imageUrl)
+            && java.util.Objects.equals(this.actions, other.actions);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(text, imageUrl, actions);
+    }
+
+    @Override
+    public String toString() {
+        return "BedrockButtonDefinition[" +
+            "text=" + this.text + ", " +
+            "imageUrl=" + this.imageUrl + ", " +
+            "actions=" + this.actions +
+            "]";
+    }
 
     /**
      * Creates a button without an image.
