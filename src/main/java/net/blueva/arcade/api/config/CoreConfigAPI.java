@@ -97,7 +97,7 @@ public interface CoreConfigAPI {
      */
     default String getLanguage(Object player, String key, Map<String, String> placeholders) {
         String message = getLanguage(player, key);
-        if (message == null || message.isBlank() || placeholders == null || placeholders.isEmpty()) {
+        if (message == null || message.trim().isEmpty() || placeholders == null || placeholders.isEmpty()) {
             return message;
         }
         for (Map.Entry<String, String> entry : placeholders.entrySet()) {

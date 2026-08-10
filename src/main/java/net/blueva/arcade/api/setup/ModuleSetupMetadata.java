@@ -1,5 +1,7 @@
 package net.blueva.arcade.api.setup;
 
+import java.util.Collections;
+
 import java.util.List;
 
 /**
@@ -23,18 +25,18 @@ public interface ModuleSetupMetadata {
     }
 
     default List<ModuleInstallRequirement> getInstallRequirements() {
-        return List.of();
+        return Collections.emptyList();
     }
 
     default List<ModuleSetupStep> getSetupSteps() {
-        return List.of();
+        return Collections.emptyList();
     }
 
     default List<ModuleSetupCommand> getSetupCommands() {
-        return List.of();
+        return Collections.emptyList();
     }
 
     default List<ModuleSetupStatusCheck<?, ?, ?>> getStatusChecks() {
-        return List.of();
+        return Collections.emptyList();
     }
 }

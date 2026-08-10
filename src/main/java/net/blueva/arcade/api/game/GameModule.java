@@ -65,7 +65,7 @@ public interface GameModule<P, L, W, M, I, S, B, E, Ls, Pr> {
     default void onPlayerRespawn(GameContext<P, L, W, M, I, S, B, E> context, P player) {}
 
     default Map<String, String> getCustomPlaceholders(P player) {
-        return Map.of();
+        return Collections.emptyMap();
     }
 
     /**

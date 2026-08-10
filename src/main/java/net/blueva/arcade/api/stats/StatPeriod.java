@@ -59,7 +59,7 @@ public enum StatPeriod {
      * @return the matching StatPeriod, or null if not found
      */
     public static StatPeriod fromId(String input) {
-        if (input == null || input.isBlank()) {
+        if (input == null || input.trim().isEmpty()) {
             return null;
         }
         String normalized = input.trim().toLowerCase(Locale.ROOT);

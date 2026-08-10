@@ -1,7 +1,10 @@
 package net.blueva.arcade.api.config;
 
+import java.util.Collections;
+
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Map;
 
 /**
@@ -33,7 +36,7 @@ public interface ModuleConfigAPI {
      * @deprecated since 3.4, use {@link #register(String)}. BlueArcade no longer
      * uses {@code file_version} / {@code file-version} metadata in module files.
      */
-    @Deprecated(since = "3.4", forRemoval = false)
+    @Deprecated
     boolean register(String fileName, int fileVersion);
 
     /**
@@ -239,7 +242,7 @@ public interface ModuleConfigAPI {
      * @since 3.4
      */
     default String getTranslation(Object player, String key, String... placeholders) {
-        return replaceTranslationPlaceholders(getTranslation(player, key), placeholders);
+        return Placeholders.replace(getTranslation(player, key), placeholders);
     }
 
     /**
@@ -253,7 +256,7 @@ public interface ModuleConfigAPI {
      * @since 3.4
      */
     default String getTranslation(Object player, String key, Map<String, String> placeholders) {
-        return replaceTranslationPlaceholders(getTranslation(player, key), placeholders);
+        return Placeholders.replace(getTranslation(player, key), placeholders);
     }
 
     /**
@@ -271,11 +274,11 @@ public interface ModuleConfigAPI {
     }
 
     default String getTranslationOrDefault(Object player, String key, String defaultValue, String... placeholders) {
-        return replaceTranslationPlaceholders(getTranslationOrDefault(player, key, defaultValue), placeholders);
+        return Placeholders.replace(getTranslationOrDefault(player, key, defaultValue), placeholders);
     }
 
     default String getTranslationOrDefault(Object player, String key, String defaultValue, Map<String, String> placeholders) {
-        return replaceTranslationPlaceholders(getTranslationOrDefault(player, key, defaultValue), placeholders);
+        return Placeholders.replace(getTranslationOrDefault(player, key, defaultValue), placeholders);
     }
 
     /**
@@ -294,7 +297,7 @@ public interface ModuleConfigAPI {
      */
     default List<String> getTranslationList(Object player, String key) {
         List<String> value = getStringListFrom("language.yml", key);
-        return value != null ? value : List.of();
+        return value != null ? value : Collections.<String>emptyList();
     }
 
     /**
@@ -312,7 +315,7 @@ public interface ModuleConfigAPI {
         if (placeholders == null || placeholders.length == 0 || values.isEmpty()) {
             return values;
         }
-        return values.stream().map(value -> replaceTranslationPlaceholders(value, placeholders)).toList();
+        return values.stream().map(value -> Placeholders.replace(value, placeholders)).collect(Collectors.toList());
     }
 
     default List<String> getTranslationList(Object player, String key, Map<String, String> placeholders) {
@@ -320,7 +323,7 @@ public interface ModuleConfigAPI {
         if (placeholders == null || placeholders.isEmpty() || values.isEmpty()) {
             return values;
         }
-        return values.stream().map(value -> replaceTranslationPlaceholders(value, placeholders)).toList();
+        return values.stream().map(value -> Placeholders.replace(value, placeholders)).collect(Collectors.toList());
     }
 
     default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue) {
@@ -330,14 +333,14 @@ public interface ModuleConfigAPI {
 
     default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue, String... placeholders) {
         return getTranslationListOrDefault(player, key, defaultValue).stream()
-                .map(value -> replaceTranslationPlaceholders(value, placeholders))
-                .toList();
+                .map(value -> Placeholders.replace(value, placeholders))
+                .collect(Collectors.toList());
     }
 
     default List<String> getTranslationListOrDefault(Object player, String key, List<String> defaultValue, Map<String, String> placeholders) {
         return getTranslationListOrDefault(player, key, defaultValue).stream()
-                .map(value -> replaceTranslationPlaceholders(value, placeholders))
-                .toList();
+                .map(value -> Placeholders.replace(value, placeholders))
+                .collect(Collectors.toList());
     }
 
     // ===== SET METHODS (for runtime modification) =====
@@ -352,27 +355,5 @@ public interface ModuleConfigAPI {
      */
     void setIn(String fileName, String path, Object value);
 
-    private static String replaceTranslationPlaceholders(String value, String... placeholders) {
-        if (value == null || placeholders == null) {
-            return value;
-        }
-        String result = value;
-        for (int i = 0; i + 1 < placeholders.length; i += 2) {
-            result = result.replace(placeholders[i], placeholders[i + 1]);
-        }
-        return result;
-    }
 
-    private static String replaceTranslationPlaceholders(String value, Map<String, String> placeholders) {
-        if (value == null || placeholders == null || placeholders.isEmpty()) {
-            return value;
-        }
-        String result = value;
-        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-            if (entry.getKey() != null && entry.getValue() != null) {
-                result = result.replace(entry.getKey(), entry.getValue());
-            }
-        }
-        return result;
-    }
 }

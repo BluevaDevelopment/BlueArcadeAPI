@@ -1,6 +1,11 @@
 package net.blueva.arcade.api.config;
 
+import java.util.Arrays;
+
+import java.util.Collections;
+
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Map;
 
 /**
@@ -52,7 +57,7 @@ public interface LanguageAPI<P> {
      * @deprecated use {@link #getEffectiveLocale(Object)} for the active locale or
      * {@link #getManualLocale(Object)} for the stored manual override.
      */
-    @Deprecated(since = "3.4", forRemoval = false)
+    @Deprecated
     default String getPlayerLocale(P player) {
         return getEffectiveLocale(player);
     }
@@ -60,7 +65,7 @@ public interface LanguageAPI<P> {
     /**
      * @deprecated use {@link #setManualLocale(Object, String)}.
      */
-    @Deprecated(since = "3.4", forRemoval = false)
+    @Deprecated
     default void setPlayerLocale(P player, String locale) {
         setManualLocale(player, locale);
     }
@@ -68,7 +73,7 @@ public interface LanguageAPI<P> {
     /**
      * @deprecated use {@link #clearManualLocale(Object)}.
      */
-    @Deprecated(since = "3.4", forRemoval = false)
+    @Deprecated
     default void clearPlayerLocale(P player) {
         clearManualLocale(player);
     }
@@ -99,7 +104,7 @@ public interface LanguageAPI<P> {
 
     default String translate(P player, String moduleId, String key, Map<String, String> placeholders) {
         String value = translate(player, moduleId, key);
-        return replacePlaceholders(value, placeholders);
+        return Placeholders.replace(value, placeholders);
     }
 
     default String translateOrDefault(P player, String moduleId, String key, String defaultValue) {
@@ -108,11 +113,11 @@ public interface LanguageAPI<P> {
     }
 
     default String translateOrDefault(P player, String moduleId, String key, String defaultValue, String... placeholders) {
-        return replacePlaceholders(translateOrDefault(player, moduleId, key, defaultValue), placeholders);
+        return Placeholders.replace(translateOrDefault(player, moduleId, key, defaultValue), placeholders);
     }
 
     default String translateOrDefault(P player, String moduleId, String key, String defaultValue, Map<String, String> placeholders) {
-        return replacePlaceholders(translateOrDefault(player, moduleId, key, defaultValue), placeholders);
+        return Placeholders.replace(translateOrDefault(player, moduleId, key, defaultValue), placeholders);
     }
 
     /**
@@ -122,7 +127,7 @@ public interface LanguageAPI<P> {
      */
     default List<String> translateList(P player, String moduleId, String key) {
         String value = translate(player, moduleId, key);
-        return value == null || value.equals(key) ? List.of() : List.of(value);
+        return value == null || value.equals(key) ? Collections.<String>emptyList() : Collections.singletonList(value);
     }
 
     /**
@@ -136,7 +141,7 @@ public interface LanguageAPI<P> {
         if (placeholders == null || placeholders.length == 0 || values.isEmpty()) {
             return values;
         }
-        return values.stream().map(value -> replacePlaceholders(value, placeholders)).toList();
+        return values.stream().map(value -> Placeholders.replace(value, placeholders)).collect(Collectors.toList());
     }
 
     default List<String> translateList(P player, String moduleId, String key, Map<String, String> placeholders) {
@@ -144,7 +149,7 @@ public interface LanguageAPI<P> {
         if (placeholders == null || placeholders.isEmpty() || values.isEmpty()) {
             return values;
         }
-        return values.stream().map(value -> replacePlaceholders(value, placeholders)).toList();
+        return values.stream().map(value -> Placeholders.replace(value, placeholders)).collect(Collectors.toList());
     }
 
     default List<String> translateListOrDefault(P player, String moduleId, String key, List<String> defaultValue) {
@@ -154,14 +159,14 @@ public interface LanguageAPI<P> {
 
     default List<String> translateListOrDefault(P player, String moduleId, String key, List<String> defaultValue, String... placeholders) {
         return translateListOrDefault(player, moduleId, key, defaultValue).stream()
-                .map(value -> replacePlaceholders(value, placeholders))
-                .toList();
+                .map(value -> Placeholders.replace(value, placeholders))
+                .collect(Collectors.toList());
     }
 
     default List<String> translateListOrDefault(P player, String moduleId, String key, List<String> defaultValue, Map<String, String> placeholders) {
         return translateListOrDefault(player, moduleId, key, defaultValue).stream()
-                .map(value -> replacePlaceholders(value, placeholders))
-                .toList();
+                .map(value -> Placeholders.replace(value, placeholders))
+                .collect(Collectors.toList());
     }
 
     boolean hasTranslation(String moduleId, String locale, String key);
@@ -179,9 +184,9 @@ public interface LanguageAPI<P> {
         String defaultLocale = getDefaultLocale();
         String fallbackLocale = getFallbackLocale();
         if (defaultLocale == null || defaultLocale.equals(fallbackLocale)) {
-            return fallbackLocale == null ? List.of() : List.of(fallbackLocale);
+            return fallbackLocale == null ? Collections.<String>emptyList() : Collections.singletonList(fallbackLocale);
         }
-        return List.of(defaultLocale, fallbackLocale);
+        return Arrays.asList(defaultLocale, fallbackLocale);
     }
 
     /**
@@ -196,27 +201,5 @@ public interface LanguageAPI<P> {
         return locale != null && getAvailableLocales().contains(locale);
     }
 
-    private static String replacePlaceholders(String value, String... placeholders) {
-        if (value == null || placeholders == null) {
-            return value;
-        }
-        String result = value;
-        for (int i = 0; i + 1 < placeholders.length; i += 2) {
-            result = result.replace(placeholders[i], placeholders[i + 1]);
-        }
-        return result;
-    }
 
-    private static String replacePlaceholders(String value, Map<String, String> placeholders) {
-        if (value == null || placeholders == null || placeholders.isEmpty()) {
-            return value;
-        }
-        String result = value;
-        for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-            if (entry.getKey() != null && entry.getValue() != null) {
-                result = result.replace(entry.getKey(), entry.getValue());
-            }
-        }
-        return result;
-    }
 }
