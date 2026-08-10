@@ -75,4 +75,21 @@ public interface ModuleInfo {
     default PlatformType getPlatform() {
         return null;
     }
+
+    /**
+     * Get the minimum server version this module supports, as declared by the
+     * {@code game-version} field in {@code module.yml}.
+     * <p>
+     * The value is a plain version string of the target platform's own versioning scheme
+     * (e.g. {@code "1.16"} on Minecraft) and means "this module runs on that version and any
+     * newer one" - there is no upper bound. A module that omits the field declares no minimum
+     * and this method returns {@code null}.
+     * </p>
+     *
+     * @return the minimum supported server version, or {@code null} if not declared
+     * @since 3.5
+     */
+    default String getGameVersion() {
+        return null;
+    }
 }
