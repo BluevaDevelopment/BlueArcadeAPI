@@ -31,6 +31,13 @@
     <repositories>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>blueva-repo</id>
+            <url>https://repo.blueva.net/releases</url>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains</groupId>
